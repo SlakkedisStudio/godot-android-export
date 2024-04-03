@@ -58,7 +58,9 @@ runs:
         echo "Current User: $(whoami)"
         ls /usr/local/bin
         ls -ld /usr/local/bin
-        sudo mv ./godot-4.1-4.2.1-stable /usr/local/bin/godot
+        mkdir -p /usr/local/bin/godot
+        mv ./godot-4.1-4.2.1-stable /usr/local/bin/
+        ls /usr/local/bin
         godot --headless --path ${{ inputs.working-directory }} --quit-after 200 -v -e > /dev/null
 
     - name: Set Android SDK path in Godot Editor settings
