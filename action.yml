@@ -57,7 +57,7 @@ runs:
         rm -f godot-editor-linux.zip spine-godot-templates-4.1-4.2.1-stable.tpz
         sudo mv godot-4.1-4.2.1-stable /usr/local/bin/godot
         ls /usr/local/bin
-        sudo godot --headless --path ${{ inputs.working-directory }} --quit-after 200 -v -e > /dev/null
+        /usr/local/bin/godot --headless --path ${{ inputs.working-directory }} --quit-after 200 -v -e > /dev/null
 
     - name: Set Android SDK path in Godot Editor settings
       if: steps.cache-godot.outputs.cache-hit != 'true'
