@@ -59,6 +59,8 @@ runs:
         sudo chmod +x /usr/local/bin/godot
 
     - name: "Run Godot Engine in Headless mode"
+      shell: bash
+      if: steps.cache-godot.outputs.cache-hit != 'true'
       run: sudo godot --headless --path ${{ inputs.working-directory }} --quit
 
     - name: Set Android SDK path in Godot Editor settings
