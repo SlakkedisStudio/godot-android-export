@@ -27,6 +27,11 @@ runs:
       shell: bash
       run: exit 1
 
+
+    - name: "Checking output"
+      shell: bash
+      run: echo ${{ inputs.godot-version }}
+
     - name: Set up JDK
       uses: actions/setup-java@v4
       with:
