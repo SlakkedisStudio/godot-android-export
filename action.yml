@@ -27,11 +27,6 @@ runs:
       shell: bash
       run: exit 1
 
-
-    - name: "Checking output"
-      shell: bash
-      run: echo $ADMOB_APP_ID
-
     - name: Set up JDK
       uses: actions/setup-java@v4
       with:
@@ -99,7 +94,7 @@ runs:
       shell: bash
       run: |
         sed -i '/<\/application>/i\ <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="'$ADMOB_APP_ID'"/>' ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
-        echo "This is the working directory"
+        echo "Android AppManifest.xml ->"
         cat ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
         
 
