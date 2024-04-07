@@ -14,6 +14,10 @@ inputs:
     description: 'Godot Engine version'
     required: false
     default: '4.2'
+  ADMOB_APP_ID:
+    description: 'AdMob App ID'
+    required: false
+    default: 'ca-app-pub-3940256099942544~3347511713'
 
 runs:
   using: 'composite'
@@ -84,6 +88,13 @@ runs:
         touch ${{ inputs.working-directory }}/android/build/.gdignore
         echo ${{ inputs.godot-version }}.stable >> ${{ inputs.working-directory }}/android/.build_version
         unzip ~/.local/share/godot/export_templates/${{ inputs.godot-version }}.stable/android_source.zip  -d ${{ inputs.working-directory }}/android/build
+
+
+    - name: Add AdMob to manifest
+      shell: bash
+      run: |
+        sed -i '/<\/application>/i\ <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="${{ inputs.ADMOB_APP_ID }}"/>' ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
+        
 
     - name: Export
       shell: bash
