@@ -30,7 +30,7 @@ runs:
 
     - name: "Checking output"
       shell: bash
-      run: echo ${{ inputs.godot-version }}
+      run: echo ${{ inputs.ADMOB_APP_ID }}
 
     - name: Set up JDK
       uses: actions/setup-java@v4
