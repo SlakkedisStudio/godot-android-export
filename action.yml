@@ -30,7 +30,7 @@ runs:
 
     - name: "Checking output"
       shell: bash
-      run: echo ${{ inputs.ADMOB_APP_ID }}
+      run: echo $ADMOB_APP_ID
 
     - name: Set up JDK
       uses: actions/setup-java@v4
@@ -98,7 +98,7 @@ runs:
     - name: Add AdMob to manifest
       shell: bash
       run: |
-        sed -i '/<\/application>/i\ <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="${{ inputs.ADMOB_APP_ID }}"/>' ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
+        sed -i '/<\/application>/i\ <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="'$ADMOB_APP_ID'"/>' ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
         echo "This is the working directory"
         cat ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
         
