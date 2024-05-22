@@ -94,6 +94,9 @@ runs:
       shell: bash
       run: |
         sed -i '/<\/application>/i\ <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="'$ADMOB_APP_ID'"/>' ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
+        echo "Added admob config to manifest"
+        sed -i '/<\/manifest>/i\ <uses-permission android:name="android.permission.INTERNET" />' ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
+        echo "Added internet permission to manifest"
         echo "Android AppManifest.xml ->"
         cat ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
         
