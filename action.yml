@@ -18,6 +18,10 @@ inputs:
     description: 'AdMob App ID'
     required: false
     default: 'ca-app-pub-3940256099942544~3347511713'
+  GPGS_APP_ID:
+    description: 'GPGS App ID'
+    required: false
+    default: ''
 
 runs:
   using: 'composite'
@@ -89,17 +93,41 @@ runs:
         echo ${{ inputs.godot-version }}.stable >> ${{ inputs.working-directory }}/android/.build_version
         unzip ~/.local/share/godot/export_templates/${{ inputs.godot-version }}.stable/android_source.zip  -d ${{ inputs.working-directory }}/android/build
 
-
     - name: Add AdMob to manifest
       shell: bash
       run: |
         sed -i '/<\/application>/i\ <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="'$ADMOB_APP_ID'"/>' ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
         echo "Added admob config to manifest"
         sed -i '/<\/manifest>/i\ <uses-permission android:name="android.permission.INTERNET" />' ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
+       
         echo "Added internet permission to manifest"
         echo "Android AppManifest.xml ->"
         cat ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
-        
+
+
+    - name: Add GPGS Configuration
+      shell: bash
+      run: |
+        sed -i '/<\/application>/i\  <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="@string/app_id" />' ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
+        echo "Added APP_ID to manifest"
+        sed -i '/<\/application>/i\  <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>' ${{ inputs.working-directory }}/android/build/AndroidManifest.xml
+        echo "Added gms version to manifest"
+        cat <<EOF > ${{ inputs.working-directory }}/android/build/integers.xml
+        <?xml version="1.0" encoding="utf-8"?>
+        <resources>
+          <integer name="google_play_services_version">12451000</integer>
+        </resources>
+        EOF
+        echo "Added integers.xml"
+        cat ${{ inputs.working-directory }}/android/build/integers.xml
+        cat <<EOF > ${{ inputs.working-directory }}/android/build/res/values/Strings.xml
+        <?xml version="1.0" encoding="utf-8"?>
+        <resources>
+          <string name="app_id">${{ GPGS_APP_ID }}</string>
+        </resources>
+        EOF
+        echo "Added Strings.xml"
+        cat ${{ inputs.working-directory }}/android/build/res/values/Strings.xml
 
     - name: Export
       shell: bash
