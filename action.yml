@@ -123,7 +123,7 @@ runs:
         cat <<EOF > ${{ inputs.working-directory }}/android/build/res/values/Strings.xml
         <?xml version="1.0" encoding="utf-8"?>
         <resources>
-          <string name="app_id">${{ GPGS_APP_ID }}</string>
+          <string name="app_id">${{ inputs.GPGS_APP_ID }}</string>
         </resources>
         EOF
         echo "Added Strings.xml"
