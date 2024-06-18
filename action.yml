@@ -54,16 +54,16 @@ runs:
       shell: bash
       if: steps.cache-godot.outputs.cache-hit != 'true'
       run: |
-        wget -q https://spine-godot.s3.eu-central-1.amazonaws.com/4.1/4.2.1-stable/godot-editor-linux.zip
-        wget -q https://spine-godot.s3.eu-central-1.amazonaws.com/4.1/4.2.1-stable/spine-godot-templates-4.1-4.2.1-stable.tpz
+        wget -q https://spine-godot.s3.eu-central-1.amazonaws.com/4.2/4.2.2-stable/godot-editor-linux.zip
+        wget -q https://spine-godot.s3.eu-central-1.amazonaws.com/4.2/4.2.2-stable/spine-godot-templates-4.2-4.2.2-stable.tpz
         unzip godot-editor-linux.zip
-        unzip spine-godot-templates-4.1-4.2.1-stable.tpz -d templates
+        unzip spine-godot-templates-4.2-4.2.2-stable.tpz -d templates
         mkdir -p ~/.local/share/godot/export_templates/${{ inputs.godot-version }}.stable
         mkdir -p ~/.config/godot/
         touch ~/.config/godot/editor_settings-4.tres
         mv templates/* ~/.local/share/godot/export_templates/${{ inputs.godot-version }}.stable
-        rm -f godot-editor-linux.zip spine-godot-templates-4.1-4.2.1-stable.tpz
-        sudo mv godot-4.1-4.2.1-stable /usr/local/bin/godot
+        rm -f godot-editor-linux.zip spine-godot-templates-4.2-4.2.2-stable.tpz
+        sudo mv godot-4.2-4.2.2-stable /usr/local/bin/godot
         sudo chmod +x /usr/local/bin/godot
         sudo godot --headless --path ${{ inputs.working-directory }} --quit
 
