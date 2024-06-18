@@ -13,7 +13,7 @@ inputs:
   godot-version:
     description: 'Godot Engine version'
     required: false
-    default: '4.2'
+    default: '4.2.2'
   ADMOB_APP_ID:
     description: 'AdMob App ID'
     required: false
