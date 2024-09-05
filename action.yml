@@ -13,7 +13,7 @@ inputs:
   godot-version:
     description: 'Godot Engine version'
     required: false
-    default: '4.2.2'
+    default: '4.3'
   ADMOB_APP_ID:
     description: 'AdMob App ID'
     required: false
@@ -54,16 +54,16 @@ runs:
       shell: bash
       if: steps.cache-godot.outputs.cache-hit != 'true'
       run: |
-        wget -q https://spine-godot.s3.eu-central-1.amazonaws.com/4.2/4.2.2-stable/godot-editor-linux.zip
-        wget -q https://spine-godot.s3.eu-central-1.amazonaws.com/4.2/4.2.2-stable/spine-godot-templates-4.2-4.2.2-stable.tpz
+        wget -q https://spine-godot.s3.eu-central-1.amazonaws.com/4.2/4.3-stable/godot-editor-linux.zip
+        wget -q https://spine-godot.s3.eu-central-1.amazonaws.com/4.2/4.3-stable/spine-godot-templates-4.2-4.3-stable.tpz
         unzip godot-editor-linux.zip
-        unzip spine-godot-templates-4.2-4.2.2-stable.tpz -d templates
+        unzip spine-godot-templates-4.2-4.3-stable.tpz -d templates
         mkdir -p ~/.local/share/godot/export_templates/${{ inputs.godot-version }}.stable
         mkdir -p ~/.config/godot/
         touch ~/.config/godot/editor_settings-4.tres
         mv templates/* ~/.local/share/godot/export_templates/${{ inputs.godot-version }}.stable
-        rm -f godot-editor-linux.zip spine-godot-templates-4.2-4.2.2-stable.tpz
-        sudo mv godot-4.2-4.2.2-stable /usr/local/bin/godot
+        rm -f godot-editor-linux.zip spine-godot-templates-4.2-4.3-stable.tpz
+        sudo mv godot-4.2-4.3-stable /usr/local/bin/godot
         sudo chmod +x /usr/local/bin/godot
         sudo godot --headless --path ${{ inputs.working-directory }} --quit
 
