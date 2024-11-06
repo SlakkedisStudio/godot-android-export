@@ -39,18 +39,21 @@ runs:
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
-
+      
     - name: Print JAVA_HOME
-      run: echo $JAVA_HOME
+      shell: bash
+      run: |
+      echo $JAVA_HOME
+      ls $JAVA_HOME
 
     - name: Cache Godot files
       id: cache-godot
       uses: actions/cache@v4
       with:
         path: |
-          ~/.local/share/godot/**
-          /usr/local/bin/godot
-          ~/.config/godot/**
+          # ~/.local/share/godot/**
+          # /usr/local/bin/godot
+          # ~/.config/godot/**
         key: ${{ runner.os }}-godot-${{ inputs.godot-version }}
 
     - name: Download and config Godot Engine linux server and templates
