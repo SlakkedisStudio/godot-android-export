@@ -45,7 +45,9 @@ runs:
       uses: actions/cache@v4
       with:
         path: |
-          /usr/local/bin/asdf
+          ~/.local/share/godot/**
+          /usr/local/bin/godot
+          ~/.config/godot/**
         key: ${{ runner.os }}-godot-${{ inputs.godot-version }}
 
     - name: Download and config Godot Engine linux server and templates
