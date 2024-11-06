@@ -39,12 +39,6 @@ runs:
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
-      
-    - name: Print JAVA_HOME
-      shell: bash
-      run: |
-      echo $JAVA_HOME
-      ls $JAVA_HOME
 
     - name: Cache Godot files
       id: cache-godot
